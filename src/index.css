@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  background-color: #001219;
+}
+
+/* Colors */
+
+/* Primary */
+:root {
+  --light-cyan: hsl(193, 38%, 86%); /* Light Cyan */
+  --neon-green: hsl(150, 100%, 66%); /* Neon Green */
+}
+
+/* Neutral */
+:root {
+  --grayish-blue: hsl(217, 19%, 38%); /* Grayish Blue */
+  --dark-grayish-blue: hsl(217, 19%, 24%); /* Dark Grayish Blue */
+  --dark-blue: hsl(218, 23%, 16%); /* Dark Blue */
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  font-optical-sizing: auto;
+}
+
+
+.desc {
+  color: rgb(206, 201, 201);
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: clip;
+}
