@@ -98,7 +98,7 @@ function startUp() {
     });
 }
 
-// startUp();
+startUp();
 
 
 Shery.mouseFollower();
