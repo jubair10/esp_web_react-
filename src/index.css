@@ -35,3 +35,26 @@ body{
   overflow: hidden;
   text-overflow: clip;
 }
+
+.modal-close{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.elem-scrollBar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.elem-scrollBar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.elem-scrollBar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+
+.elem-scrollBar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
