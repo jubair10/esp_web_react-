@@ -1,5 +1,7 @@
+import { HashLoader } from "react-spinners"
 
 const AnimBG = () => {
+  
   return (
     <div id="first" className="h-screen w-screen bg-[#090c0e] flex justify-center items-center absolute -z-10">
     <div className="showcase  w-full h-12 sm:h-16 lg:h-24 relative flex flex-col justify-center items-center ">
@@ -12,6 +14,12 @@ const AnimBG = () => {
       <h1 className="t6 text-5xl sm:text-6xl lg:text-8xl uppercase font-bold absolute text-center">Embed system</h1>
       <h1 className="t7 text-5xl sm:text-6xl lg:text-8xl uppercase font-bold absolute text-center">MAde by Learning Warriors</h1>
     </div>
+    <HashLoader color="#ffffff"  cssOverride={{
+    position: 'absolute',
+    bottom:'50px',
+      }}
+      className="p-16"
+      />
   </div>
   )
 }

@@ -27,6 +27,14 @@ body{
 }
 
 
+@font-face {
+  font-family: LemonMilkBold;
+  src: url(fonts/typo-grotesk-cufonfonts/Grotesk.otf);
+}
+#first div h1{
+  font-family: LemonMilkBold;
+}
+
 .desc {
   color: rgb(206, 201, 201);
   -webkit-line-clamp: 3;

@@ -1,4 +1,14 @@
-export const Card = () => {
+import { Power3 } from "gsap";
+import gsap from "gsap/gsap-core";
+import { useRef } from "react";
+import { handleMouseEnter, handleMouseLeave, magnet } from "./animationUtils";
+
+export const Card = ({ setToggleModal, setModalAnimInit }) => {
+  const btnLgRef = useRef();
+  const btnRef = useRef();
+  const handleMouseEnterImg = magnet(btnRef, 1.2, 0.5);
+  // const handleMouseEnterLg = magnet(btnLgRef, 1.08, 0.5);
+
   return (
     <>
       <div
@@ -23,13 +33,33 @@ export const Card = () => {
             sit dignissimos cum.
           </span>
           <div className="mt-3 flex justify-between items-center ">
-            <span className="btn text-xl font-medium text-white/80 bg-[#0f313173] rounded-3xl p-3 backdrop-blur-3xl">
+            <span
+              ref={btnLgRef}
+              className="btn text-xl font-medium text-white/80 bg-[#0f313173] rounded-3xl p-3 backdrop-blur-3xl"
+              onClick={() => setToggleModal(true)}
+              onMouseOver={(e) => {
+                handleMouseEnter(btnLgRef, 1.1);
+                // console.log(e);
+              }}
+              onMouseLeave={() => {
+                handleMouseLeave(btnLgRef);
+              }}
+              // onMouseEnter={handleMouseEnterLg}
+            >
               Learn More
             </span>
             <img
+              ref={btnRef}
               src="images/arrow-90.png"
               alt="learn-more"
-              className="btn h-9 w-9 mx-6 invert border-black rounded-full p-2 border-2"
+              className="btn-image btn h-9 w-9 mx-6 invert border-black rounded-full p-2 border-2"
+              onClick={() => {
+                setToggleModal(true);
+                const { x, y } = btnRef.current.getBoundingClientRect();
+                console.log(btnRef.current.getBoundingClientRect());
+                setModalAnimInit({ x, y });
+              }}
+              onMouseEnter={handleMouseEnterImg}
             />
           </div>
         </div>
