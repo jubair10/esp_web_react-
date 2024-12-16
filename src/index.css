@@ -6,6 +6,7 @@ body{
   background-color: #001219;
 }
 
+
 /* Colors */
 
 /* Primary */
@@ -31,6 +32,7 @@ body{
   font-family: LemonMilkBold;
   src: url(fonts/typo-grotesk-cufonfonts/Grotesk.otf);
 }
+
 #first div h1{
   font-family: LemonMilkBold;
 }
@@ -65,4 +67,7 @@ body{
 
 .elem-scrollBar::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+body::-webkit-scrollbar{
+  display: none;
 }

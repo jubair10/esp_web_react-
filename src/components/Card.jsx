@@ -1,71 +1,84 @@
-import { Power3 } from "gsap";
-import gsap from "gsap/gsap-core";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import { useRef } from "react";
 import { handleMouseEnter, handleMouseLeave, magnet } from "./animationUtils";
+import { motion } from "framer-motion";
+import CardBottom from "./CardBottom";
 
-export const Card = ({ setToggleModal, setModalAnimInit }) => {
-  const btnLgRef = useRef();
-  const btnRef = useRef();
-  const handleMouseEnterImg = magnet(btnRef, 1.2, 0.5);
-  // const handleMouseEnterLg = magnet(btnLgRef, 1.08, 0.5);
+export const Card = ({
+  setToggleModal,
+  setModalAnimInit,
+  setModalDataRef,
+  id,
+  desc,
+  image,
+  data,
+}) => {
+  const btnImgRef = useRef();
+
+  const handleMouseEnterIcon = magnet(btnImgRef, 1.08, 0.5);
+
+  const ref = useRef(null);
 
   return (
     <>
-      <div
-        id="fire"
-        className="card h-full w-fit rounded-2xl bg-[#123f4d] relative py-4"
+      <motion.div
+        ref={ref}
+        drag
+        dragConstraints={ref}
+        whileDrag={{ scale: 1.1 }}
+        dragElastic={0.1}
+        dragTransition={{ bounceStiffness: 100, bounceDamping: 30 }}
+        id={id}
+        className="card h-full w-fit rounded-2xl bg-[#123f4d] relative py-4 mt-10 sm:mt-0"
       >
-        <div className="flex items-center justify-between px-4">
-          <span className="text-[2.5em] font-semibold">Fire</span>
+        <div className="flex items-center justify-between px-4 ">
+            <span className={`font-semibold`}>
+              {id === "fire Detected" && data["total_fire_ignited"]
+                ? `Fire Ignited: ${data["total_fire_ignited"]} Times`
+                : id === "gas Detected" && data["total_gas_detected"]
+                ? `Gas Smelled: ${data['total_gas_detected']} Times`
+                : id === "temperature"
+                ? `Temperature: ${data["temperature"]}°C`
+                : id === "humidity"
+                ? `Humidity: ${data["humidity"]}%`
+                : capitalizeString(id)}
+          </span>
           <img
-            src="./images/fire.png"
+            ref={btnImgRef}
+            src={image}
             alt="fire-gif"
-            className="saturate-150 h-16 w-16 absolute right-3 -top-9"
+            className=" rounded-full h-16 w-16 absolute right-3 -top-9"
+            onClick={() => setToggleModal(true)}
+            onMouseEnter={handleMouseEnterIcon}
           />
         </div>
         <div className="px-4">
-          <span className="desc text-sm">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-            nulla fugiat numquam tempore molestiae iste itaque explicabo,
-            consequatur ad temporibus libero porro fuga impedit voluptatibus in
-            natus ipsum. Expedita accusantium hic temporibus explicabo, placeat
-            ipsam molestiae quaerat odio, perferendis doloribus quasi assumenda
-            sit dignissimos cum.
-          </span>
-          <div className="mt-3 flex justify-between items-center ">
-            <span
-              ref={btnLgRef}
-              className="btn text-xl font-medium text-white/80 bg-[#0f313173] rounded-3xl p-3 backdrop-blur-3xl"
-              onClick={() => setToggleModal(true)}
-              onMouseOver={(e) => {
-                handleMouseEnter(btnLgRef, 1.1);
-                // console.log(e);
-              }}
-              onMouseLeave={() => {
-                handleMouseLeave(btnLgRef);
-              }}
-              // onMouseEnter={handleMouseEnterLg}
-            >
-              Learn More
-            </span>
-            <img
-              ref={btnRef}
-              src="images/arrow-90.png"
-              alt="learn-more"
-              className="btn-image btn h-9 w-9 mx-6 invert border-black rounded-full p-2 border-2"
-              onClick={() => {
-                setToggleModal(true);
-                const { x, y } = btnRef.current.getBoundingClientRect();
-                console.log(btnRef.current.getBoundingClientRect());
-                setModalAnimInit({ x, y });
-              }}
-              onMouseEnter={handleMouseEnterImg}
-            />
-          </div>
+          <span className={`desc text-sm`}>{desc}</span>
+
+          <CardBottom
+            setToggleModal={setToggleModal}
+            setModalAnimInit={setModalAnimInit}
+            setModalDataRef={setModalDataRef}
+            id={id}
+          />
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
 
-// export default Card;
+function capitalizeString(s) {
+  // Split the string into words
+  var words = s.split(" ");
+
+  // Capitalize the first letter of each word
+  var capitalizedWords = words.map(function (word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  });
+
+  // Join the capitalized words back into a single string
+  var capitalizedString = capitalizedWords.join(" ");
+
+  return capitalizedString;
+}

@@ -1,4 +1,4 @@
-import { gsap, Expo, Power3 } from "gsap";
+import { gsap, Expo, Power4 } from "gsap";
 
 export function startUp ()  {
     let tl = gsap.timeline();
@@ -187,7 +187,7 @@ export const magnet = (btnRef, scale, magnetStrength) => {
         x: newX - centerX,
         y: newY - centerY,
         duration: 0.2,
-        ease: Power3.easeOut,
+        ease: Power4.easeOut
       });
     };
 
@@ -216,3 +216,4 @@ export const magnet = (btnRef, scale, magnetStrength) => {
   // Return the handleMouseEnter function to be called externally
   return handleMouseEnter;
 };
+
