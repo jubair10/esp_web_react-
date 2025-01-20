@@ -19,6 +19,7 @@
     "firebase": "^11.1.0",
     "framer-motion": "^11.1.7",
     "gsap": "^3.12.5",
+    "js-base64": "^3.7.7",
     "locomotive-scroll": "^5.0.0-beta.11",
     "notistack": "^3.0.1",
     "react": "^18.2.0",

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, query } from "firebase/database";
 import { fireNotification, gasNotification } from "../utils/Notifications";
+import { Base64 } from 'js-base64';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -19,7 +20,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-const RealtimeUpdates = ({ setData }) => {
+const RealtimeUpdates = ({ setData, setImgData }) => {
   const [latestData, setLatestData] = useState(null);
 
   useEffect(() => {
@@ -44,6 +45,31 @@ const RealtimeUpdates = ({ setData }) => {
       setLatestData(null);
     };
   }, [setData]);
+
+  useEffect(() => {
+    const imgRef = ref(database, "image_urls")
+    const imgDataQuery = query(imgRef);
+
+    onValue(imgDataQuery, (snapshot) => {
+      if (snapshot.exists()) {
+        const imgData = snapshot.val();
+        const keys = Object.keys(imgData).sort();
+        const latestKey = keys[keys.length - 1];
+        const decodedImage = Base64.decode(imgData[latestKey].url);
+        imgData[latestKey].url = decodedImage;
+        console.log(imgData[latestKey]);
+        setImgData(imgData[latestKey]);
+        
+      } else {
+        console.log("No image data available");
+      }
+    });
+  
+    return () => {
+      
+    }
+  }, [setImgData])
+  
 
   return null
 };
